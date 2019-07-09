@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/homeFragment"
+          android:title="首页"
+          android:icon="@drawable/home" />
+    <item android:id="@+id/action_settings"
+          android:title="项目"
+          android:icon="@drawable/project" />
+    <item android:id="@+id/action_navigation"
+          android:title="体系"
+          android:icon="@drawable/gongzhonghao" />
+    <item android:id="@+id/action_navigation"
+          android:title="公众号"
+          android:icon="@drawable/gongzhonghao" />
+    <item android:id="@+id/action_navigation"
+          android:title="导航"
+          android:icon="@drawable/gongzhonghao" />
+
+</menu>
