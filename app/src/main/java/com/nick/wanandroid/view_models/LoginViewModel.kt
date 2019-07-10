@@ -14,6 +14,11 @@ import retrofit2.Response
  * @author Administrator
  */
 class LoginViewModel : ViewModel() {
+    enum class LoginState{
+        SUCCESS,
+        FAILD
+    }
+    val  loginstate = MutableLiveData<LoginState>()
 
     val  user : MutableLiveData<Result<User>> by lazy {
         MutableLiveData<Result<User>>()
@@ -31,5 +36,9 @@ class LoginViewModel : ViewModel() {
 
                 })
          return user
+    }
+
+    init {
+        loginstate.value =LoginState.FAILD
     }
 }

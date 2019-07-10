@@ -17,6 +17,9 @@ import com.nick.wanandroid.entity.Result
 import com.nick.wanandroid.entity.User
 import com.nick.wanandroid.view_models.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.et_name
+import kotlinx.android.synthetic.main.fragment_login.et_password
+import kotlinx.android.synthetic.main.fragment_register.*
 
 
 /**
@@ -44,6 +47,8 @@ class LoginFragment : Fragment() {
             Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_registerFragment)
 
         }
+        et_name.setText("lixianzhongim@gmail.com")
+        et_password.setText("bur806111")
 
         btn_login.setOnClickListener {
 
@@ -69,7 +74,10 @@ class LoginFragment : Fragment() {
                 println(Thread.currentThread().name+"--"+it.errorCode)
                 if (it.errorCode == 0 ){
                     Toast.makeText(this@LoginFragment.context,"登录成功",Toast.LENGTH_SHORT).show()
-                    NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_mainFragment)
+                    val loginViewModel =  ViewModelProviders.of(activity!!)[LoginViewModel::class.java]
+                    loginViewModel.loginstate.value = LoginViewModel.LoginState.SUCCESS
+//                 Navigation?.navigate(R.id.action_global_homeFragment)
+                Navigation.findNavController(activity!!,R.id.fragment).navigate(R.id.action_global_homeFragment)
                 }else{
                     Toast.makeText(this@LoginFragment.context,it.errorMsg,Toast.LENGTH_SHORT).show()
                 }

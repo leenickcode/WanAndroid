@@ -11,44 +11,22 @@ class Test {
             field = value
         }
 }
-fun  Test.call(){
-    println("动1动1，收到回复")
-}
-
 
 
 
 fun main(args: Array<String>) {
 
-    val over:Shape = Shape.ovel
-    println(    over.name
-    )
-    println(    over.declaringClass
-    )
-    println(    over.compareTo(Shape.rectangle)
-    )
+
+}
+class TestCase {
+
+    private val name: Int by lazy { 1 }
+
+    fun printname() {
+        println(name)
+    }
+
 }
 
-fun add(): Unit {
-    do {
 
-    }while (true)
-}
-
-enum class Color{
-    RED,BLACK,BLUE,GREEN,WHITE,Yellow
-}
-enum class Shape(value:Int){
-    ovel(100),
-    rectangle(200)
-}
-// 创建接口
-interface Base {
-    fun print()
-}
-
-// 实现此接口的被委托的类
-class BaseImpl(val x: Int) : Base {
-    override fun print() { print(x) }
-}
 
