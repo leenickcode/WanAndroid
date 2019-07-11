@@ -1,6 +1,7 @@
 package com.nick.wanandroid.ui
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
 import com.nick.wanandroid.R
+import com.nick.wanandroid.adapters.HomePageAdapter
 import com.nick.wanandroid.adapters.ProjectAdapter
 import com.nick.wanandroid.entity.Article
 import com.nick.wanandroid.entity.ArticleData
@@ -22,10 +25,6 @@ import com.nick.wanandroid.view_models.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -34,9 +33,8 @@ private const val ARG_PARAM2 = "param2"
 
 class HomeFragment : Fragment() {
     var loginModel :LoginViewModel?=null
-    var homeViewModel :HomeViewModel ?= null
 
-     lateinit var  mAdapter:ProjectAdapter
+    lateinit var  homePageAdapter: HomePageAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,11 +43,9 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    @SuppressLint("WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
 
         loginModel = ViewModelProviders.of(activity!!)[LoginViewModel::class.java]
             loginModel?.loginstate?.observe(viewLifecycleOwner,object:Observer<LoginViewModel.LoginState> {
@@ -65,26 +61,28 @@ class HomeFragment : Fragment() {
                 }
             })
 
-        textView2.setOnClickListener {
-            println("ajhaa")
-            val list : List<ArticleData> = listOf()
-            mAdapter.list = list
+//        tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+//            override fun onTabUnselected(p0: TabLayout.Tab?) {
+//                println("onTabUnselected"+p0?.text)
+//            }
+//
+//            override fun onTabSelected(p0: TabLayout.Tab?) {
+//                println("onTabSelected"+p0?.text)
+//            }
+//
+//            override fun onTabReselected(p0: TabLayout.Tab?) {
+//                println("onTabReselected"+p0?.text)
+//            }
+//
+//        })
 
-        }
+        homePageAdapter = HomePageAdapter(fragmentManager!!)
+
+        viewpage.adapter = homePageAdapter
+        tabLayout.setupWithViewPager(viewpage)
 
 
-        mAdapter = ProjectAdapter(activity!!)
-        rv_home.adapter =mAdapter
-        rv_home.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
 
-            getArticle(0)
     }
-    fun getArticle(page: Int): Unit {
 
-        homeViewModel = ViewModelProviders.of(activity!!)[HomeViewModel::class.java]
-        homeViewModel?.getArticle(page)?.observe(viewLifecycleOwner,Observer<Result<Article>> {
-            mAdapter.list = it?.data!!.datas
-
-        })
-    }
 }

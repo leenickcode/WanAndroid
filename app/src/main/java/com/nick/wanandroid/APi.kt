@@ -1,8 +1,6 @@
 package com.nick.wanandroid
 
-import com.nick.wanandroid.entity.Article
-import com.nick.wanandroid.entity.Result
-import com.nick.wanandroid.entity.User
+import com.nick.wanandroid.entity.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -20,9 +18,11 @@ interface APi {
     @POST("/user/login")
     fun  login(@Field("username") name :String, @Field("password") password :String ) : Call<Result<User>>
 
-    @GET("article/list/{page}/json")
+    @GET("/article/list/{page}/json")
     fun  getArticle(@Path("page") page:Int ) : Call<Result<Article>>
 
-
-
+    @GET("/project/tree/json")
+    fun  getProjectType( ) : Call<Result<List<ProjectType>>>
+    @GET("/project/list/1/json")
+    fun  getProject(@Query("cid") cid:Int) : Call<Result<ProjectList>>
 }
