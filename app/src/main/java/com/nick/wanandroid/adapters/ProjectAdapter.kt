@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nick.wanandroid.R
-import com.nick.wanandroid.entity.ArticleData
 import com.nick.wanandroid.entity.Project
 
 /**
@@ -22,7 +21,7 @@ class ProjectAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.V
         }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val view: View = LayoutInflater.from(context).inflate(R.layout.item_wenzhang, parent, false)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.item_project, parent, false)
         return HomeViewHolder(view)
     }
 
@@ -35,8 +34,10 @@ class ProjectAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.V
 
                 holder.tvTitle?.text = list[position].title
                 holder.tvAuth?.text = list[position].author
+
                 holder.tvTime?.text = list[position].niceDate
-                holder.tvType?.text =list[position].superChapterName  +"/"+list[position].chapterName
+//                holder.tvType?.text =list[position].superChapterName  +"/"+list[position].chapterName
+                holder.tvIntro?.text = list[position].desc
             }
     }
 
@@ -45,13 +46,13 @@ class ProjectAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.V
          var tvAuth: TextView? = null
          var tvType: TextView? = null
          var tvTime: TextView? = null
-
+        var tvIntro: TextView? = null
         init {
             tvTitle = view.findViewById(R.id.tv_title)
-            tvAuth = view.findViewById(R.id.tv_auth)
-            tvType = view.findViewById(R.id.tv_type)
+            tvAuth = view.findViewById(R.id.tv_author)
+            tvType = view.findViewById(R.id.tv_search)
             tvTime = view.findViewById(R.id.tv_time)
-
+            tvIntro=view.findViewById(R.id.tv_intro)
         }
     }
 }

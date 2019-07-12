@@ -3,6 +3,7 @@ package com.nick.wanandroid.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.nick.wanandroid.R
-import com.nick.wanandroid.adapters.ArticleAdpater
+import com.nick.wanandroid.adapters.ArticleAdapter
 import com.nick.wanandroid.entity.Article
 import com.nick.wanandroid.entity.Result
 import com.nick.wanandroid.view_models.HomeViewModel
@@ -27,10 +28,11 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class ArticleFragment : Fragment() {
 
+class ArticleFragment : Fragment() {
+   private val TAG  = "ArticleFragment"
     var homeViewModel: HomeViewModel? = null
-   lateinit var  mAdapter: ArticleAdpater
+   lateinit var  mAdapter: ArticleAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,8 +44,9 @@ class ArticleFragment : Fragment() {
     @SuppressLint("WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+       Log.d(TAG, "onViewCreated: ")
         rv_article.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        mAdapter = ArticleAdpater(activity!!)
+        mAdapter = ArticleAdapter(activity!!)
         rv_article.adapter = mAdapter
         getArticle(0)
     }
@@ -52,8 +55,14 @@ class ArticleFragment : Fragment() {
 
         homeViewModel = ViewModelProviders.of(activity!!)[HomeViewModel::class.java]
         homeViewModel?.getArticle(page)?.observe(viewLifecycleOwner, Observer<Result<Article>> {
+                Log.d(TAG, "getArticle: ")
             mAdapter.list = it?.data!!.datas
 
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d(TAG, "onDestroyView: ")
     }
 }
