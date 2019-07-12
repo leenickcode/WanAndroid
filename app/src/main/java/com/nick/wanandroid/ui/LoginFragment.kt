@@ -10,13 +10,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.nick.wanandroid.R
 import com.nick.wanandroid.entity.Result
 import com.nick.wanandroid.entity.User
 import com.nick.wanandroid.view_models.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.et_name
+import kotlinx.android.synthetic.main.fragment_login.et_password
+import kotlinx.android.synthetic.main.fragment_register.*
 
 
 /**
@@ -25,7 +30,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
  */
 class LoginFragment : Fragment() {
   private  var  loginViewModel :LoginViewModel?= null
-
+   lateinit  var navController :NavController
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,12 +43,16 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d("aaa",Thread.currentThread().name)
         loginViewModel = ViewModelProviders.of(activity!!)[com.nick.wanandroid.view_models.LoginViewModel::class.java]
+
+        navController = view.findNavController()
         tv_register.setOnClickListener {
             v ->
 
-            Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_registerFragment)
+            navController.navigate(R.id.action_loginFragment_to_registerFragment)
 
         }
+        et_name.setText("lixianzhongim@gmail.com")
+        et_password.setText("bur806111")
 
         btn_login.setOnClickListener {
 
@@ -56,7 +65,9 @@ class LoginFragment : Fragment() {
                     Toast.makeText(this@LoginFragment.context,"密码为空",Toast.LENGTH_SHORT).show()
                 }
                 else ->{
-                    login()
+                    loginViewModel!!.loginstate.value = LoginViewModel.LoginState.SUCCESS
+                    navController.navigate(R.id.action_global_homeFragment)
+//                    login()
                 }
             }
 
@@ -66,13 +77,18 @@ class LoginFragment : Fragment() {
   private  fun  login(){
         loginViewModel?.login(et_name.text.toString(),et_password.text.toString())
             ?.observe(this, Observer<Result<User>> {
+                println("LoginFragment")
                 println(Thread.currentThread().name+"--"+it.errorCode)
                 if (it.errorCode == 0 ){
                     Toast.makeText(this@LoginFragment.context,"登录成功",Toast.LENGTH_SHORT).show()
-                    NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_mainFragment)
+                    val loginViewModel =  ViewModelProviders.of(activity!!)[LoginViewModel::class.java]
+                    loginViewModel.loginstate.value = LoginViewModel.LoginState.SUCCESS
+//                 Navigation?.navigate(R.id.action_global_homeFragment)
+                    navController.navigate(R.id.action_global_homeFragment)
                 }else{
                     Toast.makeText(this@LoginFragment.context,it.errorMsg,Toast.LENGTH_SHORT).show()
                 }
             })
+
     }
 }
