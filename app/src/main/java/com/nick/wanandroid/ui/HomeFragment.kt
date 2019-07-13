@@ -3,6 +3,7 @@ package com.nick.wanandroid.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,16 +26,15 @@ import com.nick.wanandroid.view_models.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
-
 /**
  * A simple [Fragment] subclass.
  *
  */
 
 class HomeFragment : Fragment() {
-    var loginModel :LoginViewModel?=null
-
-    lateinit var  homePageAdapter: HomePageAdapter
+    var loginModel: LoginViewModel? = null
+      private val TAG  = "HomeFragment"
+    lateinit var homePageAdapter: HomePageAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,42 +46,16 @@ class HomeFragment : Fragment() {
     @SuppressLint("WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.d(TAG, "onViewCreated: ")
         loginModel = ViewModelProviders.of(activity!!)[LoginViewModel::class.java]
-            loginModel?.loginstate?.observe(viewLifecycleOwner,object:Observer<LoginViewModel.LoginState> {
-                override fun onChanged(t: LoginViewModel.LoginState?) {
-                    println("HomeFragment")
-                    when(t){
-                        LoginViewModel.LoginState.FAILD  ->{
-                            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_navigation)
-                        }
-                        LoginViewModel.LoginState.SUCCESS ->{
+        if (!loginModel!!.loginstate) {
 
-                        }
-                    }
-                }
-            })
-
-//        tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
-//            override fun onTabUnselected(p0: TabLayout.Tab?) {
-//                println("onTabUnselected"+p0?.text)
-//            }
-//
-//            override fun onTabSelected(p0: TabLayout.Tab?) {
-//                println("onTabSelected"+p0?.text)
-//            }
-//
-//            override fun onTabReselected(p0: TabLayout.Tab?) {
-//                println("onTabReselected"+p0?.text)
-//            }
-//
-//        })
-
-        homePageAdapter = HomePageAdapter(fragmentManager!!)
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_navigation)
+        }
+        homePageAdapter = HomePageAdapter(childFragmentManager!!)
 
         viewpage.adapter = homePageAdapter
         tabLayout.setupWithViewPager(viewpage)
-
 
 
     }

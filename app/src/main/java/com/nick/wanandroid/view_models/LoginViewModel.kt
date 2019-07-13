@@ -18,7 +18,7 @@ class LoginViewModel : ViewModel() {
         SUCCESS,
         FAILD
     }
-    val  loginstate = MutableLiveData<LoginState>()
+    var loginstate  = false
 
     val  user : MutableLiveData<Result<User>> by lazy {
         MutableLiveData<Result<User>>()
@@ -38,7 +38,5 @@ class LoginViewModel : ViewModel() {
          return user
     }
 
-    init {
-        loginstate.value =LoginState.FAILD
-    }
+
 }

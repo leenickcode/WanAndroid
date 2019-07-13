@@ -10,10 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.nick.wanandroid.R
 import com.nick.wanandroid.entity.Result
 import com.nick.wanandroid.entity.User
@@ -30,7 +29,7 @@ import kotlinx.android.synthetic.main.fragment_register.*
  */
 class LoginFragment : Fragment() {
   private  var  loginViewModel :LoginViewModel?= null
-   lateinit  var navController :NavController
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,14 +40,12 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("aaa",Thread.currentThread().name)
+        Log.d("onViewCreated",Thread.currentThread().name)
         loginViewModel = ViewModelProviders.of(activity!!)[com.nick.wanandroid.view_models.LoginViewModel::class.java]
-
-        navController = view.findNavController()
         tv_register.setOnClickListener {
             v ->
 
-            navController.navigate(R.id.action_loginFragment_to_registerFragment)
+            Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_registerFragment)
 
         }
         et_name.setText("lixianzhongim@gmail.com")
@@ -65,9 +62,8 @@ class LoginFragment : Fragment() {
                     Toast.makeText(this@LoginFragment.context,"密码为空",Toast.LENGTH_SHORT).show()
                 }
                 else ->{
-                    loginViewModel!!.loginstate.value = LoginViewModel.LoginState.SUCCESS
-                    navController.navigate(R.id.action_global_homeFragment)
-//                    login()
+                    Log.d("onViewCreated","login")
+                    login()
                 }
             }
 
@@ -77,18 +73,21 @@ class LoginFragment : Fragment() {
   private  fun  login(){
         loginViewModel?.login(et_name.text.toString(),et_password.text.toString())
             ?.observe(this, Observer<Result<User>> {
-                println("LoginFragment")
-                println(Thread.currentThread().name+"--"+it.errorCode)
+
+                Log.d("destination",findNavController().currentDestination?.id.toString())
                 if (it.errorCode == 0 ){
                     Toast.makeText(this@LoginFragment.context,"登录成功",Toast.LENGTH_SHORT).show()
-                    val loginViewModel =  ViewModelProviders.of(activity!!)[LoginViewModel::class.java]
-                    loginViewModel.loginstate.value = LoginViewModel.LoginState.SUCCESS
+//                    val loginViewModel =  ViewModelProviders.of(activity!!)[LoginViewModel::class.java]
+//                    loginViewModel.loginstate.value = LoginViewModel.LoginState.SUCCESS
 //                 Navigation?.navigate(R.id.action_global_homeFragment)
-                    navController.navigate(R.id.action_global_homeFragment)
+                    loginViewModel!!.loginstate  = true
+                    findNavController().popBackStack()
+                    Log.d("destination",findNavController().currentDestination?.id.toString())
+//                    findNavController().navigate(R.id.action_global_homeFragment)
+
                 }else{
                     Toast.makeText(this@LoginFragment.context,it.errorMsg,Toast.LENGTH_SHORT).show()
                 }
             })
-
     }
 }

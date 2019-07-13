@@ -13,7 +13,7 @@ import com.nick.wanandroid.entity.ArticleData
  * Created by Administrator on 2019/7/11 0011.
  * @author Administrator
  */
-class ArticleAdpater(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ArticleAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var list: List<ArticleData> = listOf()
         set(value) {
             field = value
@@ -47,7 +47,7 @@ class ArticleAdpater(val context: Context) : RecyclerView.Adapter<RecyclerView.V
 
         init {
             tvTitle = view.findViewById(R.id.tv_title)
-            tvAuth = view.findViewById(R.id.tv_auth)
+            tvAuth = view.findViewById(R.id.tv_author)
             tvType = view.findViewById(R.id.tv_type)
             tvTime = view.findViewById(R.id.tv_time)
 
