@@ -25,4 +25,6 @@ interface APi {
     fun  getProjectType( ) : Call<Result<List<ProjectType>>>
     @GET("/project/list/1/json")
     fun  getProject(@Query("cid") cid:Int) : Call<Result<ProjectList>>
+    @GET("/tree/json")
+    fun  getSystemTree() :Call<Result<List<SystemBean>>>
 }

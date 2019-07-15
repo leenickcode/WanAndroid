@@ -1,6 +1,7 @@
 package com.nick.wanandroid.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ class ProjectAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.V
             field = value
             notifyDataSetChanged()
         }
+      private val TAG  = "ProjectAdapter"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         val view: View = LayoutInflater.from(context).inflate(R.layout.item_project, parent, false)
@@ -26,6 +28,7 @@ class ProjectAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.V
     }
 
     override fun getItemCount(): Int {
+        Log.d(TAG, "getItemCount: "+list.size)
         return list.size
     }
 
