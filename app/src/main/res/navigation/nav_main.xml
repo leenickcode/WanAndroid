@@ -19,8 +19,8 @@
     </navigation>
     <fragment android:id="@+id/systemFragment" android:name="com.nick.wanandroid.ui.SystemFragment"
               android:label="fragment_system" tools:layout="@layout/fragment_system"/>
-    <fragment android:id="@+id/gongzhonghaoFragment" android:name="com.nick.wanandroid.GongzhonghaoFragment"
+    <fragment android:id="@+id/gongzhonghaoFragment" android:name="com.nick.wanandroid.ui.GongzhonghaoFragment"
               android:label="fragment_gongzhonghao" tools:layout="@layout/fragment_gongzhonghao"/>
-    <fragment android:id="@+id/myFragment" android:name="com.nick.wanandroid.MyFragment" android:label="fragment_my"
+    <fragment android:id="@+id/myFragment" android:name="com.nick.wanandroid.ui.MyFragment" android:label="fragment_my"
               tools:layout="@layout/fragment_my"/>
 </navigation>

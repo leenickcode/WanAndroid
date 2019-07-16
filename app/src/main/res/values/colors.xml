@@ -5,4 +5,8 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="doderBlue">#1E90FF</color>
+    <color name="white">#FFFFFF	</color>
+    <color name="CornflowerBlue">#6495ED</color>
+    <color name="gray91">#E8E8E8</color>
+    <color name="black">#000000</color>
 </resources>

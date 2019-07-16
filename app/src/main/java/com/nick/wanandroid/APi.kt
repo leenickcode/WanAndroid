@@ -27,4 +27,9 @@ interface APi {
     fun  getProject(@Query("cid") cid:Int) : Call<Result<ProjectList>>
     @GET("/tree/json")
     fun  getSystemTree() :Call<Result<List<SystemBean>>>
+    @GET("/wxarticle/chapters/json")
+    fun  getGongzhong() :Call<Result<List<GongzhonghaoBean>>>
+
+    @GET("/wxarticle/list/{id}/{page}/json")
+    fun  getWxArticle(@Path("id") id: Int,@Path("page") page:Int):Call<Result<WxArticle>>
 }

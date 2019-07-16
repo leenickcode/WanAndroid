@@ -58,7 +58,8 @@ public class FrameTextView extends TextView implements View.OnClickListener{
      * @param isNeedInnerFrame 是否需要内边框
      * @param frameWidth 内边框宽度
      */
-    public void initFrame(int textColor, int textBGColor, int frameColor, int selectTtextColor, int selectTextBGColor, int selectFrameColor, int frameWidth, int round, boolean isClickable, boolean isNeedInnerFrame) {
+    public void initFrame(int textColor, int textBGColor, int frameColor, int selectTtextColor, int selectTextBGColor,
+                          int selectFrameColor, int frameWidth, int round, boolean isClickable, boolean isNeedInnerFrame) {
         this.textColor = textColor;
         this.textBGColor = textBGColor;
         this.frameColor = frameColor;
