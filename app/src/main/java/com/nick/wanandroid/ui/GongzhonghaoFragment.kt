@@ -53,14 +53,12 @@ class GongzhonghaoFragment : Fragment() {
         tab_gongzhong.addOnTabSelectedListener(object :
             TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
             override fun onTabReselected(p0: TabLayout.Tab?) {
-               Log.d(TAG, "onTabReselected: ")
             }
 
             override fun onTabUnselected(p0: TabLayout.Tab?) {
-
             }
-
             override fun onTabSelected(p0: TabLayout.Tab?) {
+                Log.d(TAG, "onTabSelected: ")
                 getArticle(p0!!.position)
             }
 
@@ -80,7 +78,6 @@ class GongzhonghaoFragment : Fragment() {
         viewModel.wxList.value?.get(postion)?.let { viewModel.getWxArticle(it.id,
             1
             ).observe(this, Observer {
-                Log.d(TAG, "getArticle: ")
                     mAdapter.data = it?.datas as MutableList<WxArticle.Data>
         }) }
     }

@@ -40,21 +40,16 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("onViewCreated",Thread.currentThread().name)
         loginViewModel = ViewModelProviders.of(activity!!)[com.nick.wanandroid.view_models.LoginViewModel::class.java]
         tv_register.setOnClickListener {
             v ->
-
             Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_registerFragment)
-
         }
         et_name.setText("lixianzhongim@gmail.com")
         et_password.setText("bur806111")
 
         btn_login.setOnClickListener {
-
             when{
-
                 et_name.text.isEmpty()->{
                     Toast.makeText(this@LoginFragment.context,"用户名为空",Toast.LENGTH_SHORT).show()
                 }
@@ -77,14 +72,8 @@ class LoginFragment : Fragment() {
                 Log.d("destination",findNavController().currentDestination?.id.toString())
                 if (it.errorCode == 0 ){
                     Toast.makeText(this@LoginFragment.context,"登录成功",Toast.LENGTH_SHORT).show()
-//                    val loginViewModel =  ViewModelProviders.of(activity!!)[LoginViewModel::class.java]
-//                    loginViewModel.loginstate.value = LoginViewModel.LoginState.SUCCESS
-//                 Navigation?.navigate(R.id.action_global_homeFragment)
                     loginViewModel!!.loginstate  = true
                     findNavController().popBackStack()
-                    Log.d("destination",findNavController().currentDestination?.id.toString())
-//                    findNavController().navigate(R.id.action_global_homeFragment)
-
                 }else{
                     Toast.makeText(this@LoginFragment.context,it.errorMsg,Toast.LENGTH_SHORT).show()
                 }

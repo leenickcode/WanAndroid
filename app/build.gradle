@@ -48,4 +48,6 @@ dependencies {
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+
+    implementation 'com.anggrayudi:android-hidden-api:28.1'
 }
