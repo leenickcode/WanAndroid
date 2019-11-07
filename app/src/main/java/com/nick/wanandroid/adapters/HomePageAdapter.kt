@@ -11,17 +11,17 @@ import com.nick.wanandroid.ui.ProjectFragment
  * Created by Administrator on 2019/7/11 0011.
  * @author Administrator
  */
-class HomePageAdapter (fm:FragmentManager):FragmentPagerAdapter(fm) {
-      private val TAG  = "HomePageAdapter"
-    val  list:List<Fragment> = listOf(ArticleFragment(),ProjectFragment())
-    val titles = listOf("最新博文","最新项目")
+class HomePageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    private val TAG = "HomePageAdapter"
+    val list: List<Fragment> = listOf(ArticleFragment(), ProjectFragment())
+    private val titles = listOf("最新博文", "最新项目")
     override fun getItem(position: Int): Fragment {
-        Log.d(TAG, "getItem: "+list[position])
-           return list[position]
+        Log.d(TAG, "getItem: " + list[position])
+        return list[position]
     }
 
     override fun getCount(): Int {
-        Log.d(TAG, "getCount: "+list.size)
+        Log.d(TAG, "getCount: " + list.size)
         return list.size
     }
 

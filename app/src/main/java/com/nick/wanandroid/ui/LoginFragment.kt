@@ -73,7 +73,7 @@ class LoginFragment : Fragment() {
                 if (it.errorCode == 0 ){
                     Toast.makeText(this@LoginFragment.context,"登录成功",Toast.LENGTH_SHORT).show()
                     loginViewModel!!.loginstate  = true
-                    findNavController().popBackStack()
+                    findNavController().navigate(R.id.homeFragment)
                 }else{
                     Toast.makeText(this@LoginFragment.context,it.errorMsg,Toast.LENGTH_SHORT).show()
                 }
