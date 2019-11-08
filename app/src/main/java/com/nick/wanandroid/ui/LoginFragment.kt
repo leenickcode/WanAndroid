@@ -45,8 +45,8 @@ class LoginFragment : Fragment() {
             v ->
             Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_registerFragment)
         }
-        et_name.setText("lixianzhongim@gmail.com")
-        et_password.setText("bur806111")
+        et_name.setText("nick")
+        et_password.setText("111111")
 
         btn_login.setOnClickListener {
             when{

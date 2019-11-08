@@ -17,6 +17,10 @@ import kotlinx.android.parcel.RawValue
     val size: Int,
     val total: Int
 )
+
+/**
+ * 这用的是kotlin扩展的序列化组件
+ */
 @Parcelize
 data class Project(
     val apkLink: String,

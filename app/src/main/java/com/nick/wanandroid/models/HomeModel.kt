@@ -13,12 +13,24 @@ import retrofit2.Callback
  * @author Administrator
  */
 class HomeModel {
-
+    /**
+     * 获取首页文章
+     */
     fun getArticle(page: Int,  callback: Callback<Result<Article>>): Unit {
         val retrofit =  RetrofitUtil.instance
         val  aPi = retrofit.create(APi::class.java)
         val call : Call<Result<Article>> = aPi.getArticle(page)
         //使用对象表达式来创建匿名内部类
+        call.enqueue(callback)
+    }
+
+    /**
+     * 收藏文章
+     */
+    fun collect(id:Int,callback: Callback<Result<Any>>){
+        val retrofit =  RetrofitUtil.instance
+        val  aPi = retrofit.create(APi::class.java)
+        val  call  = aPi.collect(id)
         call.enqueue(callback)
     }
 }

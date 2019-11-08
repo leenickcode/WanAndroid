@@ -18,6 +18,9 @@ interface APi {
     @POST("/user/login")
     fun  login(@Field("username") name :String, @Field("password") password :String ) : Call<Result<User>>
 
+    /**
+     * 获取首页文章
+     */
     @GET("/article/list/{page}/json")
     fun  getArticle(@Path("page") page:Int ) : Call<Result<Article>>
 
@@ -32,4 +35,10 @@ interface APi {
 
     @GET("/wxarticle/list/{id}/{page}/json")
     fun  getWxArticle(@Path("id") id: Int,@Path("page") page:Int):Call<Result<WxArticle>>
+
+    /**
+     * 收藏站内文章
+     */
+    @POST("/lg/collect/{id}/json")
+    fun collect(@Path("id") id:Int):Call<Result<Any>>
 }

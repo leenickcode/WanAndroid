@@ -16,6 +16,7 @@ import retrofit2.Response
 class HomeViewModel : ViewModel() {
     val homeModel: HomeModel = HomeModel()
     val articleList:MutableLiveData<Result<Article>> = MutableLiveData()
+    val collect:MutableLiveData<Result<Any>> = MutableLiveData()
     fun getArticle(page: Int): MutableLiveData<Result<Article>> {
         homeModel.getArticle(page, object : Callback<Result<Article>> {
             override fun onResponse(call: Call<Result<Article>>?, response: Response<Result<Article>>?) {
@@ -27,4 +28,17 @@ class HomeViewModel : ViewModel() {
         })
         return articleList
     }
+      fun  collectArticle(id:Int): MutableLiveData<Result<Any>> {
+          homeModel.collect(id,object :Callback<Result<Any>>{
+              override fun onFailure(call: Call<Result<Any>>?, t: Throwable?) {
+
+              }
+
+              override fun onResponse(call: Call<Result<Any>>?, response: Response<Result<Any>>?) {
+                  collect.value=response?.body()
+              }
+
+          })
+          return collect
+      }
 }
