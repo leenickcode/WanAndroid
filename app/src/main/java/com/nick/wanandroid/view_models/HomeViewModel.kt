@@ -1,5 +1,6 @@
 package com.nick.wanandroid.view_models
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nick.wanandroid.entity.Article
@@ -14,6 +15,7 @@ import retrofit2.Response
  * @author Administrator
  */
 class HomeViewModel : ViewModel() {
+      private val TAG  = "HomeViewModel"
     val homeModel: HomeModel = HomeModel()
     val articleList:MutableLiveData<Result<Article>> = MutableLiveData()
     val collect:MutableLiveData<Result<Any>> = MutableLiveData()
@@ -35,6 +37,7 @@ class HomeViewModel : ViewModel() {
               }
 
               override fun onResponse(call: Call<Result<Any>>?, response: Response<Result<Any>>?) {
+                  Log.d(TAG, "onResponse: ")
                   collect.value=response?.body()
               }
 

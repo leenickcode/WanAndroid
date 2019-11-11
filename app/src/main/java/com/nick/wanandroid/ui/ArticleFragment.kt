@@ -51,8 +51,10 @@ class ArticleFragment : BaseFragment() {
             override fun onClick(any: Any, position: Int, view: View) {
                 homeViewModel?.collectArticle((any as ArticleData).id)?.observe(viewLifecycleOwner,
                     Observer<Result<Any>> {
+                        Log.d(TAG, "onClick: ")
                         if (it.errorCode == 0) {
                             Toast.makeText(context, "收藏成功", Toast.LENGTH_SHORT).show()
+                            getArticle(0)
                         }else{
                             Toast.makeText(context, it.errorMsg , Toast.LENGTH_SHORT).show()
                         }

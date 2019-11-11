@@ -32,6 +32,7 @@ class LoginViewModel : ViewModel() {
 
                     override fun onResponse(call: Call<Result<User>>?, response: Response<Result<User>>?) {
                         user.value = response?.body()
+
                     }
 
                 })

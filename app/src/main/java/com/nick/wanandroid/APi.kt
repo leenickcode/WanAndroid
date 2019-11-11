@@ -12,7 +12,7 @@ import retrofit2.http.*
 
 interface APi {
     companion object{
-          val BASE_URL = "https://www.wanandroid.com"
+          const val BASE_URL = "https://www.wanandroid.com"
     }
     @FormUrlEncoded
     @POST("/user/login")
