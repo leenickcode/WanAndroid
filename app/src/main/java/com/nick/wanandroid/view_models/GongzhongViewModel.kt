@@ -55,7 +55,7 @@ class GongzhongViewModel : ViewModel() {
                 Log.d(TAG, "onResponse: ")
                 if (response?.body()?.errorCode == 0){
                     Log.d(TAG, "onResponse: ")
-                    articles.value= response.body().data
+                    articles.value= response.body()!!.data
                 }
             }
 

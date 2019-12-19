@@ -17,7 +17,9 @@ interface APi {
     @FormUrlEncoded
     @POST("/user/login")
     fun  login(@Field("username") name :String, @Field("password") password :String ) : Call<Result<User>>
-
+    @FormUrlEncoded
+    @POST("/user/login")
+   suspend fun  login2(@Field("username") name :String, @Field("password") password :String ):Result<User>
     /**
      * 获取首页文章
      */
