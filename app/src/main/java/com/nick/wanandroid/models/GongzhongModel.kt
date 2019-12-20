@@ -19,13 +19,12 @@ class GongzhongModel {
         api.getGongzhong().enqueue(callback)
     }
 
-    fun  getWxArticle(
+  suspend  fun  getWxArticle(
         id:Int,
-        page:Int,
-        callback: Callback<Result<WxArticle>>
-    ){
+        page:Int
+    ) :Result<WxArticle>{
         val retrofit = RetrofitUtil.instance
         val api = retrofit.create(APi::class.java)
-        api.getWxArticle(id,page).enqueue(callback)
+       return api.getWxArticle(id,page)
     }
 }

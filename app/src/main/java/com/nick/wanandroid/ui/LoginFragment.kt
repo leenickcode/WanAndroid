@@ -68,8 +68,6 @@ class LoginFragment : Fragment() {
   private  fun  login(){
         loginViewModel?.login(et_name.text.toString(),et_password.text.toString())
             ?.observe(this, Observer<Result<User>> {
-
-                Log.d("destination",findNavController().currentDestination?.id.toString())
                 if (it.errorCode == 0 ){
                     Toast.makeText(this@LoginFragment.context,"登录成功",Toast.LENGTH_SHORT).show()
                     loginViewModel!!.loginstate  = true

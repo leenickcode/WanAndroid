@@ -16,21 +16,18 @@ class HomeModel {
     /**
      * 获取首页文章
      */
-    fun getArticle(page: Int,  callback: Callback<Result<Article>>): Unit {
+  suspend  fun getArticle(page: Int): Result<Article> {
         val retrofit =  RetrofitUtil.instance
         val  aPi = retrofit.create(APi::class.java)
-        val call : Call<Result<Article>> = aPi.getArticle(page)
-        //使用对象表达式来创建匿名内部类
-        call.enqueue(callback)
+        return  aPi.getArticle(page)
     }
 
     /**
      * 收藏文章
      */
-    fun collect(id:Int,callback: Callback<Result<Any>>){
+  suspend  fun collect(id:Int):Result<Any>{
         val retrofit =  RetrofitUtil.instance
         val  aPi = retrofit.create(APi::class.java)
-        val  call  = aPi.collect(id)
-        call.enqueue(callback)
+        return aPi.collect(id)
     }
 }

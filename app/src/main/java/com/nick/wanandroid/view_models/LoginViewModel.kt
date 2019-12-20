@@ -30,16 +30,12 @@ class LoginViewModel : ViewModel() {
     }
 
     fun login(username: String, passwrod: String): MutableLiveData<Result<User>> {
-        val retrofit = RetrofitUtil.instance
-        val aPi = retrofit.create(APi::class.java)
+        val model = LoginModel()
         viewModelScope.launch {
-            Log.d(TAG, "login2: ${Thread.currentThread().name}")
             try {
-                val result = aPi.login2(username, passwrod)
-                user.value = result
+                user.value = model.login(username, passwrod)
 //                 Log.d(TAG, "login2: ${Thread.currentThread().name}")
             } catch (e: Exception) {
-                // An exception was thrown when calling the API so we're converting this to an IOException
                 Log.e(TAG, "login2: ${e.message}")
             }
 

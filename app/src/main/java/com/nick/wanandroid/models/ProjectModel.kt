@@ -18,24 +18,19 @@ class ProjectModel {
     /**
      * 获取 项目分类
      */
-    fun getProjectType(callback: Callback<Result<List<ProjectType>>>): Unit {
+ suspend  fun getProjectType():  Result<List<ProjectType>> {
         val retrofit =  RetrofitUtil.instance
         val  aPi = retrofit.create(APi::class.java)
-        val call : Call<Result<List<ProjectType>>> = aPi.getProjectType()
-        //使用对象表达式来创建匿名内部类
-        call.enqueue(callback)
+        return  aPi.getProjectType()
     }
 
     /**
      * 获取项目列表
      * @param cid 项目类别
      */
-    fun getProject(cid : Int,callback: Callback<Result<ProjectList>>){
+   suspend fun getProject(cid : Int):Result<ProjectList>{
         val retrofit =  RetrofitUtil.instance
         val  aPi = retrofit.create(APi::class.java)
-        val call : Call<Result<ProjectList>> = aPi.getProject(cid)
-        //使用对象表达式来创建匿名内部类
-        call.enqueue(callback)
-
+        return aPi.getProject(cid)
     }
 }

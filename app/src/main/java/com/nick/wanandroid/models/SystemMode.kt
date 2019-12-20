@@ -13,9 +13,8 @@ import retrofit2.Callback
  */
 class SystemMode {
 
-    fun  getSystemTree(callback: Callback<Result<List<SystemBean>>>){
+  suspend  fun  getSystemTree():Result<List<SystemBean>>{
         val retrofit = RetrofitUtil.instance
-        val call = retrofit.create(APi::class.java).getSystemTree()
-        call.enqueue(callback)
+       return  retrofit.create(APi::class.java).getSystemTree()
     }
 }
