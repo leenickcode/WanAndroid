@@ -19,6 +19,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        dexOptions {
+            // release & debug is in project animators
+            matchingFallbacks = ['release', 'debug']
+        }
     }
 }
 
