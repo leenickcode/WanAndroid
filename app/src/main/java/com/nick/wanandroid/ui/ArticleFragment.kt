@@ -8,56 +8,80 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.nick.wanandroid.R
 import com.nick.wanandroid.adapters.ArticleAdapter
+import com.nick.wanandroid.base.BaseFragment
+import com.nick.wanandroid.callback_interface.ItemClickListener
 import com.nick.wanandroid.entity.Article
+import com.nick.wanandroid.entity.ArticleData
 import com.nick.wanandroid.entity.Result
 import com.nick.wanandroid.view_models.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_article.*
+import kotlinx.android.synthetic.main.item_wenzhang.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
  *
  */
 
-class ArticleFragment : Fragment() {
-   private val TAG  = "ArticleFragment"
+class ArticleFragment : BaseFragment() {
+
+    private val TAG = "ArticleFragment"
+
+
     var homeViewModel: HomeViewModel? = null
-   lateinit var  mAdapter: ArticleAdapter
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_article, container, false)
+    lateinit var mAdapter: ArticleAdapter
+    override fun init(savedInstanceState: Bundle?) {
+        mAdapter = ArticleAdapter(activity!!)
+        homeViewModel = ViewModelProviders.of(activity!!)[HomeViewModel::class.java]
+        rv_article.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        rv_article.adapter = mAdapter
     }
+
+
+    override fun initListener() {
+        mAdapter.listener = object : ItemClickListener {
+            override fun onClick(any: Any, position: Int, view: View) {
+                homeViewModel?.collectArticle((any as ArticleData).id)?.observe(viewLifecycleOwner,
+                    Observer<Result<Any>> {
+                        Log.d(TAG, "onClick: ")
+                        if (it.errorCode == 0) {
+                            Toast.makeText(context, "收藏成功", Toast.LENGTH_SHORT).show()
+                            getArticle(0)
+                        }else{
+                            Toast.makeText(context, it.errorMsg , Toast.LENGTH_SHORT).show()
+                        }
+                    })
+            }
+        }
+    }
+
+    override fun businessLogic(savedInstanceState: Bundle?) {
+
+        getArticle(0)
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_article
+    }
+
 
     @SuppressLint("WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       Log.d(TAG, "onViewCreated: ")
-        rv_article.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        mAdapter = ArticleAdapter(activity!!)
-        rv_article.adapter = mAdapter
-        getArticle(0)
+
     }
 
     private fun getArticle(page: Int) {
-
-        homeViewModel = ViewModelProviders.of(activity!!)[HomeViewModel::class.java]
         homeViewModel?.getArticle(page)?.observe(viewLifecycleOwner, Observer<Result<Article>> {
-                Log.d(TAG, "getArticle: ")
             mAdapter.list = it?.data!!.datas
-
         })
     }
 

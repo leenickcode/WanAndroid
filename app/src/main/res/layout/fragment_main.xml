@@ -4,6 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.MainFragment" android:id="@+id/frameLayout3">
+        tools:context=".ui.ManiFragment" android:id="@+id/frameLayout3">
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

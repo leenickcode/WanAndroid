@@ -18,14 +18,14 @@ import retrofit2.Response
  */
 class LoginModel  {
 
-    fun login(username:String , passwrod :String ,callback: Callback<Result<User>>): Unit {
+  suspend  fun login(username:String , passwrod :String ): Result<User> {
 
         val retrofit =  RetrofitUtil.instance
         val  aPi = retrofit.create(APi::class.java)
-        val call : Call<Result<User>> = aPi.login(username,passwrod)
-        //使用对象表达式来创建匿名内部类
-        call.enqueue(callback)
-
+//        val call : Call<Result<User>> = aPi.login(username,passwrod)
+//        //使用对象表达式来创建匿名内部类
+//        call.enqueue(callback)
+      return aPi.login2(username, passwrod)
     }
 
 }

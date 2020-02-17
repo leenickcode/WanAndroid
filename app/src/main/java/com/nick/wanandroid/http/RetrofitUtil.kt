@@ -38,6 +38,8 @@ class RetrofitUtil {
                val interceptor = HttpLoggingInterceptor()
                interceptor.level = HttpLoggingInterceptor.Level.BODY
                builder.addInterceptor(interceptor)
+           builder.addInterceptor(ReceivedCookiesInterceptor())
+           builder.addInterceptor(AddCookiesInterceptor())
 //           }
 
            return  builder.build()

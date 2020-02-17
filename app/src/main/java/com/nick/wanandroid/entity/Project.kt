@@ -1,5 +1,9 @@
 package com.nick.wanandroid.entity
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
+
 /**
  * Created by Administrator on 2019/7/11 0011.
  * @author Administrator
@@ -14,6 +18,10 @@ package com.nick.wanandroid.entity
     val total: Int
 )
 
+/**
+ * 这用的是kotlin扩展的序列化组件
+ */
+@Parcelize
 data class Project(
     val apkLink: String,
     val author: String,
@@ -39,9 +47,9 @@ data class Project(
     val userId: Int,
     val visible: Int,
     val zan: Int
-)
-
+) : Parcelable
+@Parcelize
 data class Tag(
     val name: String,
     val url: String
-)
+) : Parcelable

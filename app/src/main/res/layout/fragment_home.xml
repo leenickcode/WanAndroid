@@ -9,21 +9,26 @@
 
 
     <com.google.android.material.tabs.TabLayout
-            android:layout_width="395dp"
+            android:id="@+id/tabLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp" android:id="@+id/tabLayout">
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.tabs.TabItem
+                android:id="@+id/tbi_article"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="最新博文" android:id="@+id/tbi_article"/>
+                android:text="最新博文" />
 
         <com.google.android.material.tabs.TabItem
+                android:id="@+id/tbi_project"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="最新项目" android:id="@+id/tbi_project"/>
+                android:text="最新项目" />
 
     </com.google.android.material.tabs.TabLayout>
     <androidx.viewpager.widget.ViewPager

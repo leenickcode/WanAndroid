@@ -48,15 +48,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated: ")
         loginModel = ViewModelProviders.of(activity!!)[LoginViewModel::class.java]
-        if (!loginModel!!.loginstate) {
-
-            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_navigation)
-        }
         homePageAdapter = HomePageAdapter(childFragmentManager!!)
 
         viewpage.adapter = homePageAdapter
         tabLayout.setupWithViewPager(viewpage)
-
 
     }
 
