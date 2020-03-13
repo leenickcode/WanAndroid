@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.nick.wanandroid.ui.ArticleFragment
 import com.nick.wanandroid.ui.ProjectFragment
 
@@ -12,6 +13,7 @@ import com.nick.wanandroid.ui.ProjectFragment
  * @author Administrator
  */
 class HomePageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
     private val TAG = "HomePageAdapter"
     val list: List<Fragment> = listOf(ArticleFragment(), ProjectFragment())
     private val titles = listOf("最新博文", "最新项目")

@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
     var loginModel: LoginViewModel? = null
-      private val TAG  = "HomeFragment"
+    private val TAG = "HomeFragment"
     lateinit var homePageAdapter: HomePageAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,10 +48,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated: ")
         loginModel = ViewModelProviders.of(activity!!)[LoginViewModel::class.java]
-        homePageAdapter = HomePageAdapter(childFragmentManager!!)
+        homePageAdapter = HomePageAdapter(childFragmentManager)
 
         viewpage.adapter = homePageAdapter
         tabLayout.setupWithViewPager(viewpage)
+
 
     }
 

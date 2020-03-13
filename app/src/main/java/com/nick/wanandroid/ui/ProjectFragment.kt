@@ -45,10 +45,14 @@ class ProjectFragment : Fragment() {
         })
         mAdapter.listener = object : ItemClickListener {
             override fun onClick(any: Any, position: Int, view: View) {
-                Log.d(TAG, "onClick: ")
                 val action =
                     HomeFragmentDirections.actionHomeFragmentToBlogDetailFragment(mAdapter.list[position])
                 findNavController().navigate(action)
+            }
+        }
+        mAdapter.listener= object : ItemClickListener {
+            override fun onClick(any: Any, position: Int, view: View) {
+
             }
         }
     }
