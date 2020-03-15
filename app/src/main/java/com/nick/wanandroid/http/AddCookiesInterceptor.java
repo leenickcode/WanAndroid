@@ -27,6 +27,8 @@ public class AddCookiesInterceptor implements Interceptor {
         SharedPreferences sharedPreferences = MyApplication.getInstance().getSharedPreferences("cookie", Context.MODE_PRIVATE);
         Log.d(TAG, "intercept: " + sharedPreferences.getString("cookie", ""));
         builder.addHeader("Cookie", sharedPreferences.getString("cookie", ""));
+//        builder.addHeader("Cookie", "loginUserName=nick");
+//        builder.addHeader("Cookie", "loginUserPassword=11111");
         return chain.proceed(builder.build());
     }
 }

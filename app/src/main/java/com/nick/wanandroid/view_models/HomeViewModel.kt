@@ -21,6 +21,7 @@ class HomeViewModel : ViewModel() {
     val homeModel: HomeModel = HomeModel()
     val articleList:MutableLiveData<Result<Article>> = MutableLiveData()
     val collect:MutableLiveData<Result<Any>> = MutableLiveData()
+     val unCollect:MutableLiveData<Result<Any>> = MutableLiveData()
     fun getArticle(page: Int): MutableLiveData<Result<Article>> {
         viewModelScope.launch {
            articleList.value= homeModel.getArticle(page)
@@ -37,4 +38,13 @@ class HomeViewModel : ViewModel() {
           }
           return collect
       }
+
+    fun  unCollect(id: Int){
+        viewModelScope.launch {
+//            Log.d(TAG, "unCollect: HomeViewModel")
+            unCollect.value=  homeModel.unCollect(id)
+
+        }
+
+    }
 }

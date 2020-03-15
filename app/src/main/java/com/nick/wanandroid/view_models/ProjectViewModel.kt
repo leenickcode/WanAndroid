@@ -20,25 +20,23 @@ import java.lang.Exception
  */
 class ProjectViewModel : ViewModel() {
     private val projectModel: ProjectModel = ProjectModel()
-    private val projectList = MutableLiveData<ProjectList>()
-    private val projectType = MutableLiveData<List<ProjectType>>()
-    fun getProjects(cid: Int): MutableLiveData<ProjectList> {
+     val projectList = MutableLiveData<ProjectList>()
+     val projectType = MutableLiveData<List<ProjectType>>()
+    fun getProjects(cid: Int) {
         viewModelScope.launch {
             try {
                 projectList.value = projectModel.getProject(cid).data
-
             } catch (e: Exception) {
                 Log.e("ProjectViewModel", e.message)
             }
         }
 
-        return projectList
     }
 
     /**
      * 获取项目类别
      */
-    fun getProjectTypes(): MutableLiveData<List<ProjectType>> {
+    fun getProjectTypes() {
         viewModelScope.launch {
             try {
                 projectType.value = projectModel.getProjectType()?.data
@@ -46,6 +44,5 @@ class ProjectViewModel : ViewModel() {
                 Log.e("ProjectViewModel", e.message)
             }
         }
-        return projectType
     }
 }

@@ -34,7 +34,7 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 user.value = model.login(username, passwrod)
-//                 Log.d(TAG, "login2: ${Thread.currentThread().name}")
+                 Log.d(TAG, "login2: ${Thread.currentThread().name}")
             } catch (e: Exception) {
                 Log.e(TAG, "login2: ${e.message}")
             }

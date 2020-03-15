@@ -49,19 +49,38 @@ class ArticleFragment : BaseFragment() {
     override fun initListener() {
         mAdapter.listener = object : ItemClickListener {
             override fun onClick(any: Any, position: Int, view: View) {
-                homeViewModel?.collectArticle((any as ArticleData).id)?.observe(viewLifecycleOwner,
-                    Observer<Result<Any>> {
-                        Log.d(TAG, "onClick: ")
-                        if (it.errorCode == 0) {
-                            Toast.makeText(context, "收藏成功", Toast.LENGTH_SHORT).show()
-                            getArticle(0)
-                        }else{
-                            Toast.makeText(context, it.errorMsg , Toast.LENGTH_SHORT).show()
-                        }
-                    })
+                Log.d(TAG, "onClick: ")
+                if (any is ArticleData) {
+                    if (any.collect) {
+                        //已经收藏的取消收藏
+                        homeViewModel?.unCollect(any.id)
+                    } else {
+                        homeViewModel?.collectArticle(any.id)
+                    }
+                }
+
             }
         }
+        homeViewModel?.unCollect?.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, "unCollect: ArticleFragment")
+            if (it.errorCode == 0) {
+                Toast.makeText(context, "取消成功", Toast.LENGTH_SHORT).show()
+                getArticle(0)
+            } else {
+                Toast.makeText(context, it.errorMsg, Toast.LENGTH_SHORT).show()
+            }
+        })
+        homeViewModel?.collect?.observe(viewLifecycleOwner, Observer {
+            if (it.errorCode == 0) {
+                Toast.makeText(context, "收藏成功", Toast.LENGTH_SHORT).show()
+                getArticle(0)
+            } else {
+                Toast.makeText(context, it.errorMsg, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
+
+
 
     override fun businessLogic(savedInstanceState: Bundle?) {
 
@@ -78,13 +97,11 @@ class ArticleFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
     }
-
     private fun getArticle(page: Int) {
         homeViewModel?.getArticle(page)?.observe(viewLifecycleOwner, Observer<Result<Article>> {
             mAdapter.list = it?.data!!.datas
         })
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         Log.d(TAG, "onDestroyView: ")

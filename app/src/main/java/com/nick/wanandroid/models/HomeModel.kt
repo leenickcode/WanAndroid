@@ -1,5 +1,6 @@
 package com.nick.wanandroid.models
 
+import android.util.Log
 import com.nick.wanandroid.APi
 import com.nick.wanandroid.entity.Article
 import com.nick.wanandroid.entity.Result
@@ -13,6 +14,7 @@ import retrofit2.Callback
  * @author Administrator
  */
 class HomeModel {
+      private val TAG  = "HomeModel"
     /**
      * 获取首页文章
      */
@@ -29,5 +31,15 @@ class HomeModel {
         val retrofit =  RetrofitUtil.instance
         val  aPi = retrofit.create(APi::class.java)
         return aPi.collect(id)
+    }
+
+    /**
+     * 取消收藏文章
+     */
+   suspend  fun unCollect(id: Int ):Result<Any>{
+        Log.d(TAG, "unCollect: HomeModel")
+        val retrofit =  RetrofitUtil.instance
+        val  aPi = retrofit.create(APi::class.java)
+        return aPi.unCollect(id)
     }
 }
